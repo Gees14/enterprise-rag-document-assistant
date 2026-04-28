@@ -1,0 +1,32 @@
+[
+  {
+    "question": "What is the main purpose of the document?",
+    "expected_keywords": ["purpose", "objective", "goal", "introduction"],
+    "relevant_document": "sample.pdf",
+    "relevant_pages": [1]
+  },
+  {
+    "question": "What methods or approaches are described?",
+    "expected_keywords": ["method", "approach", "technique", "algorithm"],
+    "relevant_document": "sample.pdf",
+    "relevant_pages": [2, 3]
+  },
+  {
+    "question": "What are the key findings or results?",
+    "expected_keywords": ["result", "finding", "conclusion", "outcome"],
+    "relevant_document": "sample.pdf",
+    "relevant_pages": [4, 5]
+  },
+  {
+    "question": "What limitations or constraints are mentioned?",
+    "expected_keywords": ["limitation", "constraint", "drawback", "future work"],
+    "relevant_document": "sample.pdf",
+    "relevant_pages": [5, 6]
+  },
+  {
+    "question": "Who are the intended users or beneficiaries?",
+    "expected_keywords": ["user", "audience", "beneficiary", "stakeholder"],
+    "relevant_document": "sample.pdf",
+    "relevant_pages": [1, 2]
+  }
+]

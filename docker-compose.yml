@@ -1,0 +1,48 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: rag-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      # Persist uploads and vector store data between container restarts
+      - rag-uploads:/app/data/uploads
+      - rag-vectors:/app/data/vector_store
+    env_file:
+      - .env
+    environment:
+      - UPLOAD_DIR=data/uploads
+      - VECTOR_STORE_DIR=data/vector_store
+      - EVAL_DIR=data/eval
+      - CORS_ORIGINS=http://localhost:5173
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: rag-frontend
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:8000
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  rag-uploads:
+    driver: local
+  rag-vectors:
+    driver: local
