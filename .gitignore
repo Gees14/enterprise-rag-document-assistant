@@ -69,3 +69,6 @@ Thumbs.db
 # ─────────────────────────────────────────────
 .cache/
 models/
+# Keep the app/models/ source code package
+!backend/app/models/
+!backend/app/models/**
