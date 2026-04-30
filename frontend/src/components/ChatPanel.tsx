@@ -6,8 +6,12 @@ import CitationCard from './CitationCard'
 let messageIdCounter = 0
 const newId = () => String(++messageIdCounter)
 
-export default function ChatPanel() {
-  const [messages, setMessages] = useState<ChatMessage[]>([])
+interface ChatPanelProps {
+  messages: ChatMessage[]
+  setMessages: React.Dispatch<React.SetStateAction<ChatMessage[]>>
+}
+
+export default function ChatPanel({ messages, setMessages }: ChatPanelProps) {
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)

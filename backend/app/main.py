@@ -1,4 +1,5 @@
 import os
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -17,6 +18,19 @@ for path in [settings.UPLOAD_DIR, settings.VECTOR_STORE_DIR, settings.EVAL_DIR]:
     os.makedirs(path, exist_ok=True)
 
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    logger.info(
+        "Application started.",
+        app=settings.APP_NAME,
+        version=settings.APP_VERSION,
+        llm_enabled=settings.llm_enabled,
+        embedding_model=settings.EMBEDDING_MODEL,
+    )
+    yield
+    logger.info("Application shutting down.")
+
+
 def create_app() -> FastAPI:
     app = FastAPI(
         title=settings.APP_NAME,
@@ -28,6 +42,7 @@ def create_app() -> FastAPI:
         docs_url="/docs",
         redoc_url="/redoc",
         openapi_url="/openapi.json",
+        lifespan=lifespan,
     )
 
     # CORS — allows the React frontend to call the API
@@ -47,20 +62,6 @@ def create_app() -> FastAPI:
     app.include_router(documents.router)
     app.include_router(chat.router)
     app.include_router(evaluation.router)
-
-    @app.on_event("startup")
-    async def on_startup() -> None:
-        logger.info(
-            "Application started.",
-            app=settings.APP_NAME,
-            version=settings.APP_VERSION,
-            llm_enabled=settings.llm_enabled,
-            embedding_model=settings.EMBEDDING_MODEL,
-        )
-
-    @app.on_event("shutdown")
-    async def on_shutdown() -> None:
-        logger.info("Application shutting down.")
 
     return app
 

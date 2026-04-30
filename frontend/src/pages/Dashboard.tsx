@@ -2,8 +2,14 @@ import { useState } from 'react'
 import ChatPanel from '../components/ChatPanel'
 import DocumentList from '../components/DocumentList'
 import UploadPanel from '../components/UploadPanel'
+import type { ChatMessage } from '../types'
 
-export default function Dashboard() {
+interface DashboardProps {
+  chatMessages: ChatMessage[]
+  setChatMessages: React.Dispatch<React.SetStateAction<ChatMessage[]>>
+}
+
+export default function Dashboard({ chatMessages, setChatMessages }: DashboardProps) {
   const [refreshCounter, setRefreshCounter] = useState(0)
 
   const handleUploadComplete = () => {
@@ -47,7 +53,7 @@ export default function Dashboard() {
         </div>
 
         <div className="flex-1 overflow-hidden">
-          <ChatPanel />
+          <ChatPanel messages={chatMessages} setMessages={setChatMessages} />
         </div>
       </div>
     </div>
