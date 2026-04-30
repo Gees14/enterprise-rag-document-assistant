@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { queryChat } from '../services/api'
-import type { ChatMessage, ChatResponse } from '../types'
+import type { ChatMessage } from '../types'
 import CitationCard from './CitationCard'
 
 let messageIdCounter = 0
