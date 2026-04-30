@@ -1,21 +1,22 @@
 # Enterprise RAG Document Assistant
 
+![CI](https://github.com/Gees14/enterprise-rag-document-assistant/actions/workflows/ci.yml/badge.svg)
+![Python](https://img.shields.io/badge/python-3.11-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+
 A production-quality **Retrieval-Augmented Generation (RAG)** system for document intelligence. Upload PDF documents, index them into a vector database, and ask natural language questions — receiving grounded answers with exact citations to the source document chunks.
 
-Built as a portfolio project demonstrating real AI/ML engineering depth: not a Jupyter notebook, not a demo script, but a full-stack, containerized, tested, and documented application.
+Runs fully offline without any API key (retrieval-only mode). Plug in any OpenAI-compatible API to enable LLM-generated answers.
 
 ---
 
-## Why This Project Exists
+## What Makes This Different from Tutorial RAG
 
-Most RAG tutorials produce fragile notebooks. This project shows what a production-minded AI engineer builds:
-
-- Clean service-layer architecture separating concerns
-- Configuration via environment variables (no hardcoded values)
-- Works offline without any API keys (retrieval-only mode)
-- Formal RAG evaluation metrics (precision, recall, MRR)
-- Docker + CI + tests from day one
-- Professional documentation including ADRs
+- Clean service-layer architecture — business logic separated from routes
+- Works fully offline without any API key (retrieval-only mode)
+- Formal RAG evaluation metrics (precision@k, recall@k, MRR)
+- Docker + CI + tests included
+- Configurable via environment variables, no hardcoded values
 
 ---
 
@@ -315,9 +316,7 @@ Without an API key, the system runs in retrieval-only mode: the top retrieved ch
 
 ---
 
-## What This Project Demonstrates
-
-This is a portfolio project specifically designed to showcase these AI/ML engineering skills:
+## Skills Demonstrated
 
 | Skill Area | Evidence |
 |---|---|
